@@ -1,0 +1,212 @@
+
+                   **************************************************************** COLLEGE ERP SYSTEM ****************************************************************** 
+                                                                                                                    CREATED BY :- TEJAS TANK (20CP019) 
+                                                                                                                                  JAYDEV KALARIYA (20CP038)
+
+create table student_personal_details(
+                                       adhar_no varchar(20) primary key,
+                                       gender varchar(6),
+                                       DOB date,mobile_no numeric,
+                                       email_id varchar(30),blood_group varchar(3));
+
+create table student_parent_details(father_name varchar(20),
+                                    mobile_no numeric,
+                                    occupation varchar(20),
+                                    income_per_year numeric, id_no varchar(10) primary key);
+                       
+
+create table eduaction_details(HSC_pr numeric(4,2),  
+                                    BOARD varchar(5),
+                                    SSC_pr numeric(4,2),
+                                    PASSING_YEAR int,  
+                                    id_no varchar(10) primary key);
+    
+create table student(id_no varchar(10) primary key,name varchar(20),adhar_no varchar(20));
+create table enter1(course_name varchar(20),credit int,admin_id varchar(12),course_id varchar(12),primary key(admin_id,course_id));
+   
+ 
+create table administrator(admin_id varchar(20) primary key,admin_name varchar(12));
+create table add(admin_id varchar(20),id_no varchar(20),date_of_joining date,primary key(admin_id,id_no));
+ 
+create table faculty(id varchar(20) primary key,short_name varchar(20),contact_no numeric(10),depart_name varchar(20));
+create table take(id varchar(20),course_id varchar(20),short_name varchar(20),primary key(id,course_id));
+
+create table course(course_id varchar(20) primary key,course_name varchar(20),credit  int,depart_name varchar(20));
+create table department(depart_name varchar(20) primary key,depart_no varchar(20),building   varchar(20));
+
+create table personal2(mobile_no numeric(10) primary key,email_id varchar(20));
+
+  
+create table personal1(
+                                       adhar_no varchar(20) primary key,
+                                       gender varchar(6), 
+                                       DOB date,mobile_no numeric,
+                                       blood_group varchar(3));
+      
+ create table teaches(id_no varchar(20),id varchar(20),name varchar(20),primary key(id_no , id));
+  
+alter table teaches add constraint sd foreign key (id_no) references student(id_no);
+alter table teaches add constraint sdd foreign key (id) references faculty(id);
+
+alter table student_parent_details add constraint  asd foreign key (id_no) references student(id_no);
+
+alter table eduaction_details add constraint  asdg foreign key (id_no) references student(id_no);
+
+alter table add add constraint  asdg foreign key (admin_id) references administrator(admin_id) ;
+
+alter table add add constraint  asdm foreign key (id_no) references student(id_no) ;
+
+alter table take add constraint  wedm foreign key (id) references faculty(id) ;
+
+alter table take add constraint  wrdm foreign key (course_id) references course(course_id) ;
+
+alter table enter1 add constraint  vrem foreign key (admin_id) references administrator(admin_id) ;
+
+alter table enter1 add constraint  qrem foreign key (course_id) references course(course_id) ;
+
+alter table personal1 add constraint  qrem foreign key (mobile_no) references personal2(mobile_no) ;
+
+
+
+
+insert into teaches values('20cp019','F1','tejas tank');
+insert into teaches values('20cp038','F2','jaydev kalariya');
+insert into teaches values('20cp023','F3','abc');  
+insert into teaches values('20cp012','F4','ram');      
+insert into teaches values('20cp013','F4','kishan');
+ insert into teaches values('20cp038','F1','jaydev kalariya');
+insert into teaches values('20cp019','F2','tejas tank');
+insert into teaches values('20cp012','F3','ram');
+
+
+insert into personal1 values(18392039,'male','2021-10-23',8833992234,'A');
+insert into personal1 values(18292039,'female','2021-08-21',8833490234,'A');
+insert into personal1 values(18692039,'male','2021-06-24',8833992134,'B');
+insert into personal1 values(56392039,'female','2021-04-27',8813992234,'B');
+insert into personal1 values(56392069,'male','2021-01-1',8833549224,'o');
+ 
+insert into personal2 values(8833992234,'tejastank@gmail.com');
+insert into personal2 values(8833490234,'ram@gmail.com');
+insert into personal2 values(8833992134,'jaydev@gmail.com');
+insert into personal2 values(8813992234,'abc@gmail.com');
+insert into personal2 values(8833549224,'def@gmail.com');
+  select * from personal2;        
+ insert into student values('20cp019','tejas tank',18392039);
+ insert into student values('20cp038','jaydev kalariya',18692039);
+ insert into student values('20cp023','abc',18292039);
+ insert into student values('20cp012','ram',56392039);
+ insert into student values('20cp013','kishan',56392069);
+     
+  insert into student_parent_details values('rasik bhai',9726616848,'farmer',45000,'20cp019');
+  insert into student_parent_details values('gautam bhai',9726416848,'doctor',45000,'20cp038');
+ insert into student_parent_details values('kishan bhai',7726616848,'farmer',45000,'20cp023');
+ insert into student_parent_details values('raj bhai',9726615848,'farmer',34000,'20cp012');
+ insert into student_parent_details values('kishor bhai',9726416848,'farmer',75000,'20cp013');
+ 
+ insert into eduaction_details values(98.23,'GSEB',98.66,2020,'20cp019');
+ insert into eduaction_details values(99.23,'CBSC',99.66,2020, '20cp038');
+ insert into eduaction_details values(88.23,'GSEB',95.66,2020,'20cp023');
+ insert into eduaction_details values(77.23,'ICSC',78.66,2019,'20cp012');
+ insert into eduaction_details values(99.43,'CBSC',99.66,2019, '20cp013');
+ 
+ insert into administrator values('A1','mukesh bhai');
+ insert into administrator values('A2','ramesh bhai');
+ insert into administrator values('A3','kishor bhai');
+ insert into administrator values('A4','ganesh bhai');
+  
+   
+ insert into faculty values('F1','kjs',9922338822,'cp');
+ insert into faculty values('F2','nmp',9922328822,'cp');
+ insert into faculty values('F3','mmv',7922338822,'maths');
+ insert into faculty values('F4','pbs',9922338826,'me');
+ insert into faculty values('F5','svt',3922338822,'el');
+           
+ insert into add values('A1','20cp019','2020-02-21');   
+ insert into add values('A2','20cp038','2020-02-02');
+ insert into add values('A3','20cp023','2020-02-04');
+ insert into add values('A4','20cp012','2020-02-12');
+         
+ insert into course values('2cp01','dbms',4,'cp');
+ insert into course values('2cp02','c++',4,'cp');
+ insert into course values('2cp04','maths',4,'maths');
+ insert into course values('2me04','semi-conductor',4,'me');
+          
+ insert into department values('cp','3','f');
+ insert into department values('me','4','c');
+ insert into department values('maths','5','b');
+ insert into department values('el','6','a');
+ 
+ insert into take values('F1','2cp01','kjs');
+ insert into take values('F1','2cp02','kjs');
+ insert into take values('F1','2cp04','kjs');
+ insert into take values('F1','2me04','kjs');
+ insert into take values('F2','2cp01','mmv');
+ insert into take values('F2','2cp02','mmv');
+ insert into take values('F2','2cp04','mmv');
+ insert into take values('F2','2me04','mmv');
+ insert into take values('F3','2cp01','nmp');
+ insert into take values('F3','2cp02','nmp');
+ insert into take values('F3','2cp04','nmp');
+ insert into take values('F3','2me04','nmp');
+ insert into take values('F4','2cp01','pbs');
+ insert into take values('F4','2cp02','pbs');
+ insert into take values('F4','2cp04','pbs');
+ insert into take values('F4','2me04','pbs');
+ insert into take values('F5','2cp01','svt');
+ insert into take values('F5','2cp02','svt');
+ insert into take values('F5','2cp04','svt');
+ insert into take values('F5','2me04','svt');
+ 
+ insert into enter1 values('dbms',4,'A1','2cp01');
+ insert into enter1 values('c++',4,'A2','2cp02');
+ insert into enter1 values('semi-conductor',4,'A1','2me04');
+ insert into enter1 values('maths',4,'A3','2cp04');
+ 
+-- 1..q) find number of courses taken by each faculty;
+select id,short_name ,count(course_id) 
+from take 
+group by id,short_name;
+                                       
+									 
+-- 2) find the number of faculty in each department
+select department.depart_name ,count(*)   
+from faculty JOIN department on department.depart_name=faculty.depart_name
+group by department.depart_name;
+
+-- 3) find the total number of faculty from wghich each student studied?
+select id_no,name,count(*)
+from teaches
+group by id_no,name;
+
+-- 4)find the total course of given department?
+select course_name 
+from course 
+where depart_name='cp';
+
+-- 5)retrive all information of student? 
+select student.name,b.email_id,a.gender,a.DOB,a.mobile_no,a.blood_group
+from (personal1 as a join personal2 as b on a.mobile_no=b.mobile_no) join student on a.adhar_no=student.adhar_no;
+                
+-- 6)retrive the department of each student.  
+select  b.depart_name ,distinct(student.name) 
+from (teaches as a join faculty as b on a.id=b.id) join student on a.id_no=student.id_no
+order by b.depart_name;
+
+-- 7) retrive the age of student from date of birth(DOB).
+select student.name,(CURRENT_DATE - dob)/12 as age  from personal1 join student on  student.adhar_no=personal1.adhar_no;
+   
+-- 8) retrive all students who are eligible for scholarship.
+ select b.name,b.id_no
+ from (student_parent_details as a join student as b on a.id_no=b.id_no) join eduaction_details on eduaction_details.id_no=a.id_no
+ where a.income_per_year >=40000 and eduaction_details.HSC_pr>=90.00;
+ 
+--  9) retrive all info. of student that are join before given date.
+select *
+from add
+where date_of_joining>= '2020-02-05';
+
+-- 10) retrve name of faculty who is working in onr or more then one dept. (to demonstarte one to many relationship).
+select a.short_name
+from faculty as a join department as b on a.depart_name =b.depart_name
+group by a.short_name 
+having count(*)>=1;
